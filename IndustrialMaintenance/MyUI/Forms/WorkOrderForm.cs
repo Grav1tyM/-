@@ -159,7 +159,7 @@ namespace MyUI.Forms
             txtDeviceName.Text = row.Cells["DeviceName"].Value?.ToString() ?? "";
             txtRepairPart.Text = row.Cells["RepairPart"].Value?.ToString() ?? "";
             txtFault.Text = row.Cells["FaultDesc"].Value?.ToString() ?? "";
-            nudQty.Value = Convert.ToDecimal(row.Cells["RepairQuantity"].Value);
+            nudQty.Value = Convert.ToInt32(row.Cells["RepairQuantity"].Value);
             cboStatus.Text = row.Cells["Status"].Value.ToString();
             cboPriority.Text = row.Cells["Priority"].Value.ToString();
             txtReporter.Text = row.Cells["Reporter"].Value?.ToString() ?? "";
