@@ -1,0 +1,22 @@
+## Build
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+
+## NuGet
+packages/
+*.nupkg
+project.lock.json
+
+## Misc
+*.log
+*.dbmdl
+*.jfm
+*.pfx
+*.publishsettings
