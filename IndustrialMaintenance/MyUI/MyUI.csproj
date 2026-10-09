@@ -33,16 +33,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MySql.Data">
-      <HintPath>..\libs\MySql.Data.dll</HintPath>
+    <Reference Include="MySql.Data, Version=6.9.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>MySql.Data.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SunnyUI">
-      <HintPath>..\libs\SunnyUI.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>SunnyUI.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="SunnyUI.Common">
-      <HintPath>..\libs\SunnyUI.Common.dll</HintPath>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>SunnyUI.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -114,6 +117,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="MySql.Data.dll" />
+    <None Include="SunnyUI.dll" />
+    <None Include="SunnyUI.Common.dll" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyDAL\MyDAL.csproj">
