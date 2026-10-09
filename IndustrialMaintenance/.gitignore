@@ -9,10 +9,11 @@
 *.sln.docstates
 .vs/
 
-## NuGet
+## NuGet（工程已内置 libs\ DLL，勿忽略 libs）
 packages/
 *.nupkg
 project.lock.json
+!libs/
 
 ## Misc
 *.log
