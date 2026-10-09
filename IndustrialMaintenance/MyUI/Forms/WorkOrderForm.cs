@@ -98,7 +98,7 @@ namespace MyUI.Forms
             }
             try
             {
-                int n = _matDal.CalculateMaterials(orderNo, repairPart, (int)nudQty.Value);
+                int n = _matDal.CalculateMaterials(orderNo, repairPart, Convert.ToInt32(nudQty.Value));
                 // 算料后进入处理中
                 if (int.TryParse(txtId.Text, out int id) && id > 0)
                 {
@@ -140,7 +140,7 @@ namespace MyUI.Forms
                 DeviceName = txtDeviceName.Text.Trim(),
                 RepairPart = txtRepairPart.Text.Trim(),
                 FaultDesc = txtFault.Text.Trim(),
-                RepairQuantity = (int)nudQty.Value,
+                RepairQuantity = Convert.ToInt32(nudQty.Value),
                 Status = cboStatus.Text,
                 Priority = cboPriority.Text,
                 Reporter = txtReporter.Text.Trim(),
@@ -159,7 +159,7 @@ namespace MyUI.Forms
             txtDeviceName.Text = row.Cells["DeviceName"].Value?.ToString() ?? "";
             txtRepairPart.Text = row.Cells["RepairPart"].Value?.ToString() ?? "";
             txtFault.Text = row.Cells["FaultDesc"].Value?.ToString() ?? "";
-            nudQty.Value = Convert.ToInt32(row.Cells["RepairQuantity"].Value);
+            nudQty.Value = Convert.ToDecimal(row.Cells["RepairQuantity"].Value);
             cboStatus.Text = row.Cells["Status"].Value.ToString();
             cboPriority.Text = row.Cells["Priority"].Value.ToString();
             txtReporter.Text = row.Cells["Reporter"].Value?.ToString() ?? "";

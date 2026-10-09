@@ -20,7 +20,7 @@ namespace MyUI.Forms
             this.txtDeviceName = new Sunny.UI.UITextBox();
             this.txtRepairPart = new Sunny.UI.UITextBox();
             this.txtFault = new Sunny.UI.UITextBox();
-            this.nudQty = new Sunny.UI.UIIntegerUpDown();
+            this.nudQty = new System.Windows.Forms.NumericUpDown();
             this.cboStatus = new Sunny.UI.UIComboBox();
             this.cboPriority = new Sunny.UI.UIComboBox();
             this.txtReporter = new Sunny.UI.UITextBox();
@@ -60,7 +60,8 @@ namespace MyUI.Forms
             this.txtDeviceNo.Location = new System.Drawing.Point(240, y); this.txtDeviceNo.Size = new System.Drawing.Size(120, 29); this.txtDeviceNo.Watermark = "设备编号";
             this.txtDeviceName.Location = new System.Drawing.Point(370, y); this.txtDeviceName.Size = new System.Drawing.Size(160, 29); this.txtDeviceName.Watermark = "设备名称";
             this.txtRepairPart.Location = new System.Drawing.Point(540, y); this.txtRepairPart.Size = new System.Drawing.Size(100, 29); this.txtRepairPart.Watermark = "维修部位";
-            this.nudQty.Location = new System.Drawing.Point(650, y); this.nudQty.Size = new System.Drawing.Size(80, 29); this.nudQty.Value = 1; this.nudQty.Minimum = 1;
+            this.nudQty.Location = new System.Drawing.Point(650, y); this.nudQty.Size = new System.Drawing.Size(80, 29);
+            this.nudQty.Minimum = 1; this.nudQty.Maximum = 9999; this.nudQty.Value = 1; this.nudQty.DecimalPlaces = 0;
             this.cboStatus.Location = new System.Drawing.Point(740, y); this.cboStatus.Size = new System.Drawing.Size(110, 29);
             this.cboPriority.Location = new System.Drawing.Point(860, y); this.cboPriority.Size = new System.Drawing.Size(100, 29);
 
@@ -93,7 +94,7 @@ namespace MyUI.Forms
 
         private Sunny.UI.UIDataGridView dgv;
         private Sunny.UI.UITextBox txtKeyword, txtId, txtOrderNo, txtDeviceNo, txtDeviceName, txtRepairPart, txtFault, txtReporter, txtAssignee, txtRemark;
-        private Sunny.UI.UIIntegerUpDown nudQty;
+        private System.Windows.Forms.NumericUpDown nudQty;
         private Sunny.UI.UIComboBox cboStatus, cboPriority;
         private Sunny.UI.UIButton btnSearch, btnNewNo, btnAdd, btnUpdate, btnDelete, btnCalc, btnComplete;
     }
