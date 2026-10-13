@@ -31,14 +31,12 @@ namespace MyDAL
 
         public static MySqlConnection CreateConnection()
         {
-            // Windows 上 server=localhost 会走命名管道，握手时调用 SSPI 失败。
-            // 强制 TCP + 127.0.0.1，并关闭 SSL。
+            // 账号只有 root@localhost。若改成 127.0.0.1 会匹配不到该账号。
+            // localhost 默认走命名管道会触发 SSPI，因此保留 localhost，但强制 TCP，并关闭 SSL。
             MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder(ConnStr);
-            if (string.IsNullOrEmpty(builder.Server)
-                || builder.Server.Equals("localhost", StringComparison.OrdinalIgnoreCase)
-                || builder.Server == ".")
+            if (string.IsNullOrEmpty(builder.Server) || builder.Server == ".")
             {
-                builder.Server = "127.0.0.1";
+                builder.Server = "localhost";
             }
             if (builder.Port == 0)
             {
