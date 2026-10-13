@@ -1,0 +1,23 @@
+## Build
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+
+## NuGet（工程已内置 libs\ DLL，勿忽略 libs）
+packages/
+*.nupkg
+project.lock.json
+!libs/
+
+## Misc
+*.log
+*.dbmdl
+*.jfm
+*.pfx
+*.publishsettings
