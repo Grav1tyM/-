@@ -56,7 +56,7 @@ namespace MyUI
             }
             catch (Exception ex)
             {
-                UIMessageBox.ShowError("登录失败：" + ex.Message);
+                UIMessageBox.ShowError("登录失败（MySqlConnector）：" + ex.Message);
             }
         }
 
