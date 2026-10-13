@@ -31,7 +31,15 @@ namespace MyDAL
 
         public static MySqlConnection CreateConnection()
         {
-            return new MySqlConnection(ConnStr);
+            // 无论 App.config 是否带上，都强制关闭 SSL。
+            // Windows 上 MySql.Data 默认 SslMode=Preferred 会走 SSPI，报「调用 SSPI 失败」。
+            MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder(ConnStr);
+            builder.SslMode = MySqlSslMode.None;
+            if (string.IsNullOrEmpty(builder.CharacterSet))
+            {
+                builder.CharacterSet = "utf8";
+            }
+            return new MySqlConnection(builder.ConnectionString);
         }
 
         public static DataTable ExecuteQuery(string sql, params MySqlParameter[] parameters)

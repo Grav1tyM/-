@@ -9,7 +9,7 @@ namespace MyDAL
     {
         public DataTable GetAll(string repairPart = null)
         {
-            string sql = @"SELECT b.Id, b.RepairPart, b.PartId, p.PartCode, p.PartName,
+            string sql = @"SELECT b.Id, b.RepairPart, b.PartId, p.PartCode, p.PartName, p.Specification,
                                   b.QuantityPerUnit, b.LossRate, b.MinQuantity, b.Unit, b.Remark
                            FROM BomRules b
                            INNER JOIN Parts p ON b.PartId = p.Id

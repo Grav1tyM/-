@@ -125,9 +125,7 @@ namespace MyUI
                 case "chart":
                     page = new PagePlaceholder("统计图表", "图表功能暂缓，后续可接工单/库存统计。");
                     break;
-                case "screen":
-                    page = new PagePlaceholder("数据大屏", "数据大屏功能暂缓。");
-                    break;
+                case "screen": page = new PageDataScreen(); break;
                 case "setting":
                     page = new PagePlaceholder("系统设置", "系统设置功能暂缓。连接串请改 MyUI\\App.config。");
                     break;

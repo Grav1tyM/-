@@ -21,6 +21,17 @@ namespace MyDAL
             return DBHelper.ExecuteQuery(sql + " ORDER BY Id DESC");
         }
 
+        public DataTable GetTopConsumed(int top = 5)
+        {
+            return DBHelper.ExecuteQuery(
+                @"SELECT PartName, PartCode, SUM(RequiredQuantity) AS Qty
+                  FROM MaterialRequirements
+                  WHERE Status <> 'Cancelled'
+                  GROUP BY PartName, PartCode
+                  ORDER BY Qty DESC
+                  LIMIT " + top);
+        }
+
         public DataTable GetByOrderNo(string orderNo)
         {
             return DBHelper.ExecuteQuery(

@@ -27,11 +27,25 @@ namespace MyDAL
             return Map(dt.Rows[0]);
         }
 
-        public DataTable GetAll()
+        public DataTable GetAll(string keyword = null)
         {
             string sql = @"SELECT Id, UserName, RealName, Role, Phone, Status, CreateTime
-                           FROM Users ORDER BY Id";
-            return DBHelper.ExecuteQuery(sql);
+                           FROM Users WHERE 1=1";
+            if (!string.IsNullOrWhiteSpace(keyword))
+            {
+                sql += " AND (UserName LIKE @kw OR RealName LIKE @kw)";
+                return DBHelper.ExecuteQuery(sql + " ORDER BY Id",
+                    new MySqlParameter("@kw", "%" + keyword.Trim() + "%"));
+            }
+            return DBHelper.ExecuteQuery(sql + " ORDER BY Id");
+        }
+
+        public int ResetPassword(int id, string newPassword)
+        {
+            return DBHelper.ExecuteNonQuery(
+                "UPDATE Users SET PasswordHash=@p WHERE Id=@id",
+                new MySqlParameter("@p", newPassword),
+                new MySqlParameter("@id", id));
         }
 
         public int Insert(UsersEntity entity)

@@ -25,8 +25,19 @@ namespace MyUI.Pages
             _lblWelcome.Dock = DockStyle.Top;
             _lblWelcome.Height = 36;
             _lblWelcome.Style = UIStyle.Custom;
-            _lblWelcome.Text = "欢迎使用工业维修智能化零件分配平台！ 当前用户：" + SessionContext.DisplayName
-                + "    " + DateTime.Now.ToString("yyyy年M月d日 dddd");
+            string role = "用户";
+            if (SessionContext.CurrentUser != null)
+            {
+                switch (SessionContext.CurrentUser.Role)
+                {
+                    case "Admin": role = "管理员"; break;
+                    case "Engineer": role = "维修工程师"; break;
+                    case "Storekeeper": role = "仓库管理员"; break;
+                }
+            }
+            _lblWelcome.Height = 48;
+            _lblWelcome.Text = "欢迎使用工业维修智能化零件分配平台，" + SessionContext.DisplayName + "（" + role + "）！\r\n"
+                + DateTime.Now.ToString("yyyy年M月d日 dddd");
 
             UIButton btnRefresh = new UIButton
             {
@@ -84,10 +95,33 @@ namespace MyUI.Pages
                 string[] h = { "Id", "工单号", "设备编号", "设备名称", "维修部位", "状态", "优先级", "报修人", "处理人", "报修时间", "备注" };
                 for (int i = 0; i < h.Length && i < _dgv.Columns.Count; i++)
                     _dgv.Columns[i].HeaderText = h[i];
+                TranslateGrid(_dgv);
             }
             catch (Exception ex)
             {
                 UIMessageBox.ShowError(ex.Message);
+            }
+        }
+
+        internal static void TranslateGrid(DataGridView grid)
+        {
+            if (!grid.Columns.Contains("Status") && !grid.Columns.Contains("Priority")) return;
+            foreach (DataGridViewRow row in grid.Rows)
+            {
+                if (grid.Columns.Contains("Status"))
+                {
+                    string st = Convert.ToString(row.Cells["Status"].Value);
+                    if (st == "Pending") row.Cells["Status"].Value = "待受理";
+                    else if (st == "Processing") row.Cells["Status"].Value = "处理中";
+                    else if (st == "Completed") row.Cells["Status"].Value = "已完成";
+                    else if (st == "Cancel") row.Cells["Status"].Value = "已取消";
+                }
+                if (grid.Columns.Contains("Priority"))
+                {
+                    string pr = Convert.ToString(row.Cells["Priority"].Value);
+                    if (pr == "Normal") row.Cells["Priority"].Value = "普通";
+                    else if (pr == "Urgent") row.Cells["Priority"].Value = "紧急";
+                }
             }
         }
 

@@ -86,9 +86,15 @@ namespace MyDAL
 
         public int CountByStatus(string status)
         {
+            string cn = status;
+            if (status == "Pending") cn = "待受理";
+            else if (status == "Processing") cn = "处理中";
+            else if (status == "Completed") cn = "已完成";
+            else if (status == "Cancel") cn = "已取消";
             return Convert.ToInt32(DBHelper.ExecuteScalar(
-                "SELECT COUNT(*) FROM WorkOrders WHERE Status=@s",
-                new MySqlParameter("@s", status)));
+                "SELECT COUNT(*) FROM WorkOrders WHERE Status=@s OR Status=@cn",
+                new MySqlParameter("@s", status),
+                new MySqlParameter("@cn", cn)));
         }
 
         public DataTable GetRecent(int top = 20)
@@ -96,8 +102,7 @@ namespace MyDAL
             return DBHelper.ExecuteQuery(
                 @"SELECT Id, OrderNo, DeviceNo, DeviceName, RepairPart, Status, Priority,
                          Reporter, Assignee, CreateTime, Remark
-                  FROM WorkOrders ORDER BY Id DESC LIMIT @n",
-                new MySqlParameter("@n", top));
+                  FROM WorkOrders ORDER BY Id DESC LIMIT " + top);
         }
 
         public DataTable GetFiltered(string status, string keyword, DateTime? start, DateTime? end)
