@@ -31,9 +31,20 @@ namespace MyDAL
 
         public static MySqlConnection CreateConnection()
         {
-            // 无论 App.config 是否带上，都强制关闭 SSL。
-            // Windows 上 MySql.Data 默认 SslMode=Preferred 会走 SSPI，报「调用 SSPI 失败」。
+            // Windows 上 server=localhost 会走命名管道，握手时调用 SSPI 失败。
+            // 强制 TCP + 127.0.0.1，并关闭 SSL。
             MySqlConnectionStringBuilder builder = new MySqlConnectionStringBuilder(ConnStr);
+            if (string.IsNullOrEmpty(builder.Server)
+                || builder.Server.Equals("localhost", StringComparison.OrdinalIgnoreCase)
+                || builder.Server == ".")
+            {
+                builder.Server = "127.0.0.1";
+            }
+            if (builder.Port == 0)
+            {
+                builder.Port = 3306;
+            }
+            builder.ConnectionProtocol = MySqlConnectionProtocol.Tcp;
             builder.SslMode = MySqlSslMode.None;
             if (string.IsNullOrEmpty(builder.CharacterSet))
             {
