@@ -1,7 +1,7 @@
 using System;
 using System.Configuration;
 using System.Data;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 
 namespace MyDAL
 {
@@ -42,7 +42,7 @@ namespace MyDAL
             {
                 builder.Port = 3306;
             }
-            builder.ConnectionProtocol = MySqlConnectionProtocol.Tcp;
+            builder.ConnectionProtocol = MySqlConnectionProtocol.Sockets;
             builder.SslMode = MySqlSslMode.None;
             if (string.IsNullOrEmpty(builder.CharacterSet))
             {

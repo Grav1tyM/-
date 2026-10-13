@@ -2,7 +2,7 @@ using System;
 using System.Data;
 using System.Text;
 using MyEntity;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 
 namespace MyDAL
 {
