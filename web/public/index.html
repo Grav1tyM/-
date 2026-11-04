@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>对局瞄准筛选</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <header class="mast">
+        <p class="eyebrow">Deadlock · Statlocker</p>
+        <h1>对局瞄准筛选</h1>
+        <p class="lede">
+          输入 Steam 好友代码，按 Statlocker 的查人方式找到玩家，只列出爆头率和命中率都高于阈值的对局。
+        </p>
+      </header>
+
+      <form id="query-form" class="panel">
+        <label class="field grow">
+          <span>Steam 好友代码</span>
+          <input
+            id="friend-code"
+            name="friendCode"
+            autocomplete="off"
+            spellcheck="false"
+            placeholder="例如 9560260，或 Steam 个人主页链接"
+            required
+          />
+        </label>
+        <div class="thresholds">
+          <label class="field">
+            <span>爆头率高于</span>
+            <span class="unit-input">
+              <input id="headshot" name="headshot" type="number" inputmode="decimal" min="0" max="100" step="0.1" required />
+              <em>%</em>
+            </span>
+          </label>
+          <label class="field">
+            <span>命中率高于</span>
+            <span class="unit-input">
+              <input id="accuracy" name="accuracy" type="number" inputmode="decimal" min="0" max="100" step="0.1" required />
+              <em>%</em>
+            </span>
+          </label>
+        </div>
+        <fieldset class="scope">
+          <legend>扫描范围</legend>
+          <label><input type="radio" name="scope" value="recent" checked /> 最近完整记录</label>
+          <label><input type="radio" name="scope" value="all" /> 全部对局</label>
+        </fieldset>
+        <p class="hint">只保留严格高于阈值的对局，等于不算。百分比来自 Statlocker 的对局数据，显示保留一位小数。</p>
+        <div class="actions">
+          <button id="submit" type="submit">查询</button>
+        </div>
+      </form>
+
+      <section id="status" class="status" hidden></section>
+      <section id="choices" class="panel choices" hidden></section>
+      <section id="player" class="panel player" hidden></section>
+      <section id="results" hidden></section>
+    </main>
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
