@@ -1,0 +1,7 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "查找玩家、读取比赛，并用系统浏览器打开 Statlocker。",
+  "windows": ["main"],
+  "permissions": ["core:default", "opener:default"]
+}

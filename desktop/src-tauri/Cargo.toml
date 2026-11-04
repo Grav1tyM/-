@@ -1,0 +1,20 @@
+[package]
+name = "deadlock-match-filter"
+version = "0.1.0"
+description = "Portable Deadlock match filter for Statlocker"
+authors = ["Grav1tyM"]
+edition = "2021"
+license = "MIT"
+
+[lib]
+name = "deadlock_match_filter_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+deadlock-core = { path = "../core" }
+serde = { version = "1", features = ["derive"] }
+tauri = { version = "2", features = [] }
+tauri-plugin-opener = "2"
