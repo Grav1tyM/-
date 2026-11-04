@@ -1,0 +1,35 @@
+name: Windows desktop
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - "cursor/**"
+
+jobs:
+  exe:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: desktop
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Test filter and Statlocker parsing
+        run: |
+          npm install
+          npm test
+          cargo test --manifest-path core/Cargo.toml
+      - name: Build portable exe
+        run: npm run tauri build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: DeadlockMatchFilter-windows
+          path: |
+            desktop/src-tauri/target/release/*atch*ilter*.exe
+            desktop/使用说明.txt
+          if-no-files-found: error
